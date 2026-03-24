@@ -1,12 +1,40 @@
 {
   "envId": "cloud1-1gd5koldaeae55fc",
   "isGraphQL": false,
+  "region": "ap-shanghai",
+  "containerAuths": [],
+  "services": {
+    "douban-proxy": {
+      "id": "douban-proxy",
+      "type": "container",
+      "source": "./services/douban-proxy",
+      "router": "douban",
+      "stackName": "douban-stack",
+      "containerPort": 80,
+      "cpu": 0.25,
+      "mem": 0.5,
+      "replicas": 1,
+      "strategy": {
+        "type": "rolling",
+        "rollingPercent": 25
+      },
+      "policy": {
+        "minAlive": 1,
+        "maxIdle": 10
+      },
+      "public": {
+        "enabled": true,
+        "domain": "",
+        "path": "/douban",
+        "https": true
+      }
+    }
+  },
   "triggers": [
     {
       "name": "dailyUpdate",
       "type": "timer",
       "config": "0 6 * * *"
     }
-  ],
-  "region": "ap-shanghai"
+  ]
 }

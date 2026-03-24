@@ -1,0 +1,12 @@
+{
+  "name": "douban-proxy",
+  "version": "1.0.0",
+  "description": "豆瓣Top250数据获取代理服务",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
