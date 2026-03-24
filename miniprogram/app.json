@@ -21,21 +21,21 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "榜单",
-        "iconPath": "assets/icons/home.png",
-        "selectedIconPath": "assets/icons/home-active.png"
+        "text": "榜单"
+        // "iconPath": "assets/icons/home.png",
+        // "selectedIconPath": "assets/icons/home-active.png"
       },
       {
         "pagePath": "pages/favorites/favorites",
-        "text": "收藏",
-        "iconPath": "assets/icons/star.png",
-        "selectedIconPath": "assets/icons/star-active.png"
+        "text": "收藏"
+        // "iconPath": "assets/icons/star.png",
+        // "selectedIconPath": "assets/icons/star-active.png"
       },
       {
         "pagePath": "pages/settings/settings",
-        "text": "设置",
-        "iconPath": "assets/icons/settings.png",
-        "selectedIconPath": "assets/icons/settings-active.png"
+        "text": "设置"
+        // "iconPath": "assets/icons/settings.png",
+        // "selectedIconPath": "assets/icons/settings-active.png"
       }
     ]
   },
