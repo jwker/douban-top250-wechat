@@ -21,5 +21,8 @@
     "include": []
   },
   "appid": "wxbb42ab1cb0ff205c",
-  "editorSetting": {}
+  "editorSetting": {},
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "projectname": "douban-top250"
 }

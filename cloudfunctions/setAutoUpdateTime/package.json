@@ -1,0 +1,9 @@
+{
+  "name": "setAutoUpdateTime",
+  "version": "1.0.0",
+  "description": "设置自动更新时间云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "envId": "douban-top250-xxxxx",
+  "isGraphQL": false,
+  "triggers": [
+    {
+      "name": "dailyUpdate",
+      "type": "timer",
+      "config": "0 6 * * *"
+    }
+  ],
+  "region": "ap-shanghai"
+}

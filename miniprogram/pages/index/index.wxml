@@ -1,0 +1,93 @@
+<view class="container">
+  <!-- 日期选择 -->
+  <view class="date-selector">
+    <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
+      <view class="date-display">
+        <text class="date-label">查看日期</text>
+        <text class="date-value">{{selectedDate}}</text>
+        <text class="date-tip">点击选择历史日期</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 榜单比较结果 -->
+  <view class="compare-section" wx:if="{{compareResult && selectedDate == today}}">
+    <view class="section-header" bindtap="toggleCompare">
+      <text class="section-title">与昨日榜单比较</text>
+      <text class="toggle-icon">{{showCompare ? '收起' : '展开'}}</text>
+    </view>
+
+    <view class="compare-content" wx:if="{{showCompare}}">
+      <!-- 新晋榜单 -->
+      <view class="compare-group" wx:if="{{compareResult.newMovies.length > 0}}">
+        <view class="compare-tag new">新晋</view>
+        <scroll-view scroll-x class="compare-scroll">
+          <view class="compare-movies">
+            <view class="compare-movie-item" wx:for="{{compareResult.newMovies}}" wx:key="title" bindtap="goToMovieDetail" data-id="{{item._id}}">
+              <image class="compare-poster" src="{{item.poster}}" mode="aspectFill"></image>
+              <text class="compare-movie-title">{{item.title}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <!-- 跌出榜单 -->
+      <view class="compare-group" wx:if="{{compareResult.removedMovies.length > 0}}">
+        <view class="compare-tag removed">跌出</view>
+        <scroll-view scroll-x class="compare-scroll">
+          <view class="compare-movies">
+            <view class="compare-movie-item" wx:for="{{compareResult.removedMovies}}" wx:key="title">
+              <image class="compare-poster" src="{{item.poster}}" mode="aspectFill"></image>
+              <text class="compare-movie-title">{{item.title}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <!-- 排名变化 -->
+      <view class="compare-group" wx:if="{{compareResult.rankChanged.length > 0}}">
+        <view class="compare-tag changed">变化</view>
+        <scroll-view scroll-x class="compare-scroll">
+          <view class="compare-movies">
+            <view class="compare-movie-item rank-changed" wx:for="{{compareResult.rankChanged}}" wx:key="title" bindtap="goToMovieDetail" data-id="{{item._id}}">
+              <text class="rank-change {{item.change > 0 ? 'up' : 'down'}}">{{item.change > 0 ? '↑' : '↓'}}{{item.change > 0 ? item.change : -item.change}}</text>
+              <image class="compare-poster" src="{{item.poster}}" mode="aspectFill"></image>
+              <text class="compare-movie-title">{{item.title}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class="compare-more" bindtap="goToCompare">
+        <text>查看详细对比</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 电影列表 -->
+  <view class="movie-list">
+    <view class="list-header">
+      <text class="list-title">电影榜单</text>
+      <text class="list-count">{{movies.length}}部</text>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+
+    <view class="empty-tip" wx:if="{{!loading && movies.length === 0}}">
+      <text>暂无数据，请稍后再试</text>
+    </view>
+
+    <view class="movie-item" wx:for="{{movies}}" wx:key="_id" bindtap="goToMovieDetail" data-id="{{item._id}}">
+      <view class="movie-rank">{{item.rank}}</view>
+      <image class="movie-poster" src="{{item.poster}}" mode="aspectFill"></image>
+      <view class="movie-info">
+        <text class="movie-title">{{item.title}}</text>
+        <text class="movie-meta">{{item.director}}</text>
+        <text class="movie-meta movie-rating">{{item.rating}}分</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="movie-detail" wx:if="{{movie && !loading}}">
+    <!-- 头部信息 -->
+    <view class="header">
+      <image class="poster" src="{{movie.poster}}" mode="aspectFill"></image>
+      <view class="header-info">
+        <text class="title">{{movie.title}}</text>
+        <view class="meta-row">
+          <text class="rating">{{movie.rating}}</text>
+          <text class="rating-label">分</text>
+        </view>
+        <text class="meta">{{movie.director}}</text>
+        <text class="meta">{{movie.releaseDate}}</text>
+        <text class="meta" wx:if="{{movie.duration}}">{{movie.duration}}</text>
+      </view>
+    </view>
+
+    <!-- 收藏按钮 -->
+    <view class="action-bar">
+      <button class="btn-favorite {{isFavorited ? 'active' : ''}}" bindtap="toggleFavorite">
+        <text class="icon">{{isFavorited ? '★' : '☆'}}</text>
+        <text>{{isFavorited ? '已收藏' : '收藏'}}</text>
+      </button>
+      <button class="btn-share" open-type="share">
+        <text class="icon">↗</text>
+        <text>分享</text>
+      </button>
+    </view>
+
+    <!-- 演员 -->
+    <view class="section" wx:if="{{movie.actors}}">
+      <text class="section-title">演员</text>
+      <text class="content">{{movie.actors}}</text>
+    </view>
+
+    <!-- 类型 -->
+    <view class="section" wx:if="{{movie.genre && movie.genre.length > 0}}">
+      <text class="section-title">类型</text>
+      <view class="tags">
+        <text class="tag" wx:for="{{movie.genre}}" wx:key="index">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 简介 -->
+    <view class="section" wx:if="{{movie.quote}}">
+      <text class="section-title">经典台词</text>
+      <text class="quote">"{{movie.quote}}"</text>
+    </view>
+
+    <!-- 排名信息 -->
+    <view class="section">
+      <text class="section-title">榜单排名</text>
+      <view class="rank-display">
+        <text class="rank-number">{{movie.rank}}</text>
+        <text class="rank-label">Top 250</text>
+      </view>
+    </view>
+  </view>
+</view>

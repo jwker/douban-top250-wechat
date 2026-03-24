@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">我的收藏</text>
+    <text class="page-count">{{favorites.length}}部电影</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="empty-tip" wx:if="{{!loading && favorites.length === 0}}">
+    <text class="empty-icon">☆</text>
+    <text class="empty-text">还没有收藏任何电影</text>
+    <text class="empty-hint">快去榜单里看看吧</text>
+  </view>
+
+  <view class="movie-list" wx:if="{{!loading && favorites.length > 0}}">
+    <view class="movie-item" wx:for="{{favorites}}" wx:key="_id">
+      <view class="movie-rank">{{item.rank}}</view>
+      <image class="movie-poster" src="{{item.poster}}" mode="aspectFill"></image>
+      <view class="movie-info" bindtap="goToMovieDetail" data-id="{{item._id}}">
+        <text class="movie-title">{{item.title}}</text>
+        <text class="movie-meta">{{item.director}}</text>
+        <text class="movie-rating">{{item.rating}}分</text>
+      </view>
+      <view class="movie-actions">
+        <view class="action-btn remove" bindtap="removeFavorite" data-id="{{item._id}}">
+          <text>取消</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

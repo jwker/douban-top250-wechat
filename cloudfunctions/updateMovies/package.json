@@ -1,0 +1,9 @@
+{
+  "name": "updateMovies",
+  "version": "1.0.0",
+  "description": "定时更新豆瓣Top250电影数据",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

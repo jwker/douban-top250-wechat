@@ -1,0 +1,57 @@
+<view class="container">
+  <!-- 自动更新设置 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">自动更新设置</text>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">
+        <text class="label-text">每日自动更新时间</text>
+        <text class="label-hint">每天在该时间自动更新榜单</text>
+      </view>
+      <picker mode="time" value="{{autoUpdateTime}}" bindchange="onTimeChange">
+        <view class="time-value">
+          <text>{{autoUpdateTime}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </picker>
+    </view>
+    <button class="btn-save" bindtap="saveAutoUpdateTime">
+      保存设置
+    </button>
+  </view>
+
+  <!-- 手动更新 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">数据更新</text>
+    </view>
+    <view class="update-info">
+      <text class="info-text">当前云函数配置了定时触发器，会在每天指定时间自动更新榜单。</text>
+      <text class="info-text">您也可以手动触发更新。</text>
+    </view>
+    <button class="btn-update" bindtap="manualUpdate" loading="{{loading}}">
+      <text class="btn-icon">↻</text>
+      <text>立即更新榜单</text>
+    </button>
+  </view>
+
+  <!-- 关于 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">关于</text>
+    </view>
+    <view class="about-item">
+      <text class="about-label">小程序名称</text>
+      <text class="about-value">豆瓣电影Top250</text>
+    </view>
+    <view class="about-item">
+      <text class="about-label">数据来源</text>
+      <text class="about-value">豆瓣电影</text>
+    </view>
+    <view class="about-item">
+      <text class="about-label">版本</text>
+      <text class="about-value">1.0.0</text>
+    </view>
+  </view>
+</view>

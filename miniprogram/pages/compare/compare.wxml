@@ -1,0 +1,88 @@
+<view class="container">
+  <!-- 日期选择 -->
+  <view class="date-selector">
+    <view class="date-item">
+      <text class="date-label">日期一</text>
+      <picker mode="date" value="{{date1}}" bindchange="onDate1Change">
+        <view class="date-value">{{date1 || '选择日期'}}</view>
+      </picker>
+    </view>
+
+    <view class="vs">VS</view>
+
+    <view class="date-item">
+      <text class="date-label">日期二</text>
+      <picker mode="date" value="{{date2}}" bindchange="onDate2Change">
+        <view class="date-value">{{date2 || '选择日期'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <button class="btn-compare" bindtap="compare" loading="{{loading}}">
+    开始比较
+  </button>
+
+  <!-- 比较结果 -->
+  <view class="compare-result" wx:if="{{compareResult}}">
+    <!-- 标签页 -->
+    <view class="tabs">
+      <view class="tab {{activeTab === 'new' ? 'active' : ''}}" bindtap="switchTab" data-tab="new">
+        <text>新晋</text>
+        <text class="tab-count">{{compareResult.newMovies.length}}</text>
+      </view>
+      <view class="tab {{activeTab === 'removed' ? 'active' : ''}}" bindtap="switchTab" data-tab="removed">
+        <text>跌出</text>
+        <text class="tab-count">{{compareResult.removedMovies.length}}</text>
+      </view>
+      <view class="tab {{activeTab === 'changed' ? 'active' : ''}}" bindtap="switchTab" data-tab="changed">
+        <text>变化</text>
+        <text class="tab-count">{{compareResult.rankChanged.length}}</text>
+      </view>
+    </view>
+
+    <!-- 新晋列表 -->
+    <view class="tab-content" wx:if="{{activeTab === 'new'}}">
+      <view class="empty-tip" wx:if="{{compareResult.newMovies.length === 0}}">
+        <text>没有新晋电影</text>
+      </view>
+      <view class="movie-item new" wx:for="{{compareResult.newMovies}}" wx:key="title" bindtap="goToMovieDetail" data-id="{{item._id}}">
+        <image class="movie-poster" src="{{item.poster}}" mode="aspectFill"></image>
+        <view class="movie-info">
+          <text class="movie-title">{{item.title}}</text>
+          <text class="movie-rank-info">新排名: 第{{item.newRank}}名</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 跌出列表 -->
+    <view class="tab-content" wx:if="{{activeTab === 'removed'}}">
+      <view class="empty-tip" wx:if="{{compareResult.removedMovies.length === 0}}">
+        <text>没有跌出电影</text>
+      </view>
+      <view class="movie-item removed" wx:for="{{compareResult.removedMovies}}" wx:key="title">
+        <image class="movie-poster" src="{{item.poster}}" mode="aspectFill"></image>
+        <view class="movie-info">
+          <text class="movie-title">{{item.title}}</text>
+          <text class="movie-rank-info">原排名: 第{{item.oldRank}}名</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 变化列表 -->
+    <view class="tab-content" wx:if="{{activeTab === 'changed'}}">
+      <view class="empty-tip" wx:if="{{compareResult.rankChanged.length === 0}}">
+        <text>没有排名变化</text>
+      </view>
+      <view class="movie-item changed" wx:for="{{compareResult.rankChanged}}" wx:key="title" bindtap="goToMovieDetail" data-id="{{item._id}}">
+        <view class="change-badge {{item.change > 0 ? 'up' : 'down'}}">
+          {{item.change > 0 ? '↑' : '↓'}}{{item.change > 0 ? item.change : -item.change}}
+        </view>
+        <image class="movie-poster" src="{{item.poster}}" mode="aspectFill"></image>
+        <view class="movie-info">
+          <text class="movie-title">{{item.title}}</text>
+          <text class="movie-rank-info">{{item.oldRank}} → {{item.newRank}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
