@@ -7,7 +7,7 @@
     "douban-proxy": {
       "id": "douban-proxy",
       "type": "container",
-      "source": "./services/douban-proxy",
+      "source": "./services/douban-proxy-py",
       "router": "douban",
       "stackName": "douban-stack",
       "containerPort": 80,

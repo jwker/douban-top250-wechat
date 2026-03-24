@@ -5,7 +5,7 @@ const db = cloud.database();
 const https = require('https');
 
 // 云托管服务地址（部署后在云托管控制台获取）
-const PROXY_SERVICE_URL = 'qbhpwyqt.douban-proxy.cks746h4.pqafwph5.com';
+const PROXY_SERVICE_URL = 'douban-237759-9-1408821318.sh.run.tcloudbase.com';
 
 // 通过云托管代理获取豆瓣数据
 async function fetchDoubanTop250() {
@@ -73,6 +73,9 @@ async function createDailySnapshot(date, movieCount) {
 }
 
 exports.main = async (event, context) => {
+  // 设置云函数超时时间为300秒（5分钟）
+  context.timeout = 300;
+
   const wxContext = cloud.getWXContext();
   const openid = wxContext.OPENID;
 
